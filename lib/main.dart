@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart'; // For kReleaseMode
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:trackside_app/login.dart';
+import 'package:trackside_app/login.dart';
 
 
 
@@ -53,6 +55,12 @@ class WelcomeScreen extends StatelessWidget {
                 children: [
                   const SizedBox(height: 100),  // Moves buttons lower by adding space at top
                   ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const LoginPage())
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 188, 188, 188),
                       foregroundColor: Colors.black,
@@ -65,7 +73,6 @@ class WelcomeScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20)
                       )
                     ),
-                    onPressed: () {},
                     child: const Text("Login"),
                   ),
                   const SizedBox(height: 25),  // space between buttons
