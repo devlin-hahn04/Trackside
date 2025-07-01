@@ -4,6 +4,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:trackside_app/login.dart';
 import 'package:trackside_app/login.dart';
+import 'package:trackside_app/signup.dart';
 
 
 
@@ -89,7 +90,12 @@ class WelcomeScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20)
                       )
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const SignUpPage())
+                      );
+                    },
                     child: const Text("Sign Up"),
                   ),
                   const SizedBox(height: 50),
