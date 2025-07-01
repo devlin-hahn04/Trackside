@@ -41,6 +41,22 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           ),
 
+          SafeArea(
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: IconButton(
+                  icon: const Icon(Icons.arrow_back, color: Colors.white, size: 30),
+                  onPressed: () {
+                    Navigator.pop(context); // Navigates back to the previous screen
+                  },
+                  tooltip: 'Back', // Optional: Racing-themed tooltip
+                ),
+              ),
+            ),
+          ),
+
           // Form area pushed to bottom
           SafeArea(
             child: Align(
