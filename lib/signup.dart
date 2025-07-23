@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:trackside_app/home.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -17,15 +19,61 @@ class _SignUpPageState extends State<SignUpPage> {
 
   String? errorText;
 
-  void handleSignUp() {
+  void handleSignUp() async {
     setState(() {
-      if (passwordController.text != confirmPasswordController.text) {
-        errorText = "Passwords do not match!";
-      } else {
-        errorText = null;
-        print("Sign up successful!");
-      }
+      errorText = null;
     });
+
+    if (passwordController.text != confirmPasswordController.text) {
+      setState(() {
+        errorText = "Passwords do not match!";
+      });
+      return;
+    }
+
+    try {
+      final res = await Supabase.instance.client.auth.signUp(
+        email: emailController.text.trim(),
+        password: passwordController.text,
+  
+        data: {
+          'first_name': firstNameController.text.trim(),
+          'last_name': lastNameController.text.trim(),
+        },
+        
+      );
+
+
+      if (res.user == null) {
+        setState(() {
+          errorText = 'Sign up failed, Please try again.';
+        });
+      } else {
+        // Success: you can navigate or show a message here
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const HomePage()),
+        );
+
+        // Optionally navigate away or clear the form
+      }
+    } catch (e) {
+      setState(() {
+        errorText = e.toString();
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    // Dispose all controllers to free resources
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+
+    super.dispose();
   }
 
   @override
@@ -49,9 +97,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: IconButton(
                   icon: const Icon(Icons.arrow_back, color: Colors.white, size: 30),
                   onPressed: () {
-                    Navigator.pop(context); // Navigates back to the previous screen
+                    Navigator.pop(context); // Navigates back
                   },
-                  tooltip: 'Back', // Optional: Racing-themed tooltip
+                  tooltip: 'Back',
                 ),
               ),
             ),
@@ -62,7 +110,7 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(24, 0, 24, 60), // bottom padding added
+                padding: const EdgeInsets.fromLTRB(24, 0, 24, 60),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [

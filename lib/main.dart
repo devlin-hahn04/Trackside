@@ -5,15 +5,27 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:trackside_app/login.dart';
 import 'package:trackside_app/login.dart';
 import 'package:trackside_app/signup.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 
 
-void main() => runApp(
-  DevicePreview(
-    enabled: !kReleaseMode,
-    builder: (context) => const TracksideApp(),
-  ),
-);
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: 'https://dydfevalyiuefthioeus.supabase.co',     
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR5ZGZldmFseWl1ZWZ0aGlvZXVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMwOTQ0MzEsImV4cCI6MjA2ODY3MDQzMX0.XAQot9aufInNI6nRzuN3ZyDpAf4Q-vQGYsTdSqkm8h0',       
+  );
+
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const TracksideApp(),
+    ),
+  );
+}
+
 
 class TracksideApp extends StatelessWidget {
   const TracksideApp({super.key});

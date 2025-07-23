@@ -1,15 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:trackside_app/home.dart';
 
-class LoginPage extends StatelessWidget {
+
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  String? errorText;
+
+  @override
+  void dispose() {
+    emailController.dispose();    //disposing controllers to avoid memory leaks 
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _signIn() async {
+    final email = emailController.text.trim();
+    final password = passwordController.text;
+
+    try {
+      final res = await Supabase.instance.client.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+
+      if (res.session != null) {
+        if (mounted) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const HomePage()),
+          );
+
+        }
+        
+      } else {
+        setState(() {
+          errorText = 'Invalid credentials';
+        });
+      }
+    } catch (e) {
+      final message = e is AuthException ? e.message : 'Unexpected error';
+      setState(() {
+        errorText = message;
+      });
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          
+          // Background image
           SizedBox.expand(
             child: Image.asset(
               'images/WelcomePageBckg.png',
@@ -17,6 +69,7 @@ class LoginPage extends StatelessWidget {
             ),
           ),
 
+          // Back button
           SafeArea(
             child: Align(
               alignment: Alignment.topLeft,
@@ -25,13 +78,13 @@ class LoginPage extends StatelessWidget {
                 child: IconButton(
                   icon: const Icon(Icons.arrow_back, color: Colors.white, size: 30),
                   onPressed: () {
-                    Navigator.pop(context); // Navigates back to the previous screen
+                    Navigator.pop(context);
                   },
-                  tooltip: 'Back', // Optional: Racing-themed tooltip
                 ),
               ),
             ),
           ),
+
           // Foreground content
           SafeArea(
             child: Center(
@@ -40,9 +93,8 @@ class LoginPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 180), // Spacing below logo in background
+                    const SizedBox(height: 180),
 
-                    // Login title
                     Text(
                       'Login',
                       style: GoogleFonts.racingSansOne(
@@ -53,12 +105,13 @@ class LoginPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 40),
 
-                    // Email input
+                    // Email field
                     TextField(
+                      controller: emailController,
                       decoration: InputDecoration(
                         labelText: 'Email',
                         labelStyle: const TextStyle(color: Colors.white),
-                        hintText: 'Value',
+                        hintText: 'you@example.com',
                         hintStyle: const TextStyle(color: Colors.white54),
                         filled: true,
                         fillColor: Colors.black87,
@@ -71,12 +124,13 @@ class LoginPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
 
-                    // Password input
+                    // Password field
                     TextField(
+                      controller: passwordController,
                       decoration: InputDecoration(
                         labelText: 'Password',
                         labelStyle: const TextStyle(color: Colors.white),
-                        hintText: 'Value',
+                        hintText: 'Your password',
                         hintStyle: const TextStyle(color: Colors.white54),
                         filled: true,
                         fillColor: Colors.black87,
@@ -89,27 +143,35 @@ class LoginPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 30),
 
-                    // Sign In button
+                    // Sign in button
                     SizedBox(
-                      width: double.infinity, // Makes the button take full horizontal space
+                      width: double.infinity,
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(const Color.fromARGB(255, 209, 54, 40)),
                           foregroundColor: MaterialStateProperty.all(Colors.white),
-                          padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 20)), // Taller button
-                          textStyle: MaterialStateProperty.all(const TextStyle(fontSize: 20)), // Bigger text
+                          padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 20)),
+                          textStyle: MaterialStateProperty.all(const TextStyle(fontSize: 20)),
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
                         ),
-                        onPressed: () {
-                          // Handle login
-                        },
+                        onPressed: _signIn,
                         child: const Text('Sign In'),
                       ),
                     ),
+
+                    // Error message
+                    if (errorText != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16),
+                        child: Text(
+                          errorText!,
+                          style: const TextStyle(color: Colors.red, fontSize: 16),
+                        ),
+                      ),
                   ],
                 ),
               ),
