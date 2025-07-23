@@ -1,4 +1,4 @@
-# 🏎️ Trackside App 🏁#
+# 🏎️ Trackside App 🏁
 
 Trackside App is a user-based Flutter application that brings you the latest Formula 1 season data — including the World Drivers' Championship (WDC) and World Constructors' Championship (WCC) standings — right to your fingertips! 📱✨
 
