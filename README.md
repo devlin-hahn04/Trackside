@@ -1,16 +1,31 @@
-# trackside_app
+🏎️ Trackside App 🏁
+Trackside App is a user-based Flutter application that brings you the latest Formula 1 season data — including the World Drivers' Championship (WDC) and World Constructors' Championship (WCC) standings — right to your fingertips! 📱✨
 
-A new Flutter project.
+🚀 How It Works
+🐍 A Python web scraper runs automatically using GitHub Actions ⏰
 
-## Getting Started
+🌐 It scrapes the official F1 website for up-to-date WDC & WCC data
 
-This project is a starting point for a Flutter application.
+🔄 The scraped data is converted into JSON format 📄
 
-A few resources to get you started if this is your first Flutter project:
+☁️ This JSON data is sent and stored in a Supabase project
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+📲 The Trackside App fetches the data from Supabase and displays it beautifully in the app UI 🎨
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+🎯 Features
+👤 User authentication (Sign Up, Login, Logout) powered by Supabase
+
+📊 Live season standings for Drivers & Constructors
+
+🔄 Automatic updates powered by continuous scraping and syncing
+
+🎨 Clean and responsive Flutter UI for a seamless user experience
+
+🛠️ Technologies Used
+Flutter — cross-platform mobile app development 🐦
+
+Supabase — backend, auth, and database services ☁️
+
+Python — web scraping 🐍
+
+GitHub Actions — automation & scheduling 🤖
