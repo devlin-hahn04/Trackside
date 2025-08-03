@@ -6,7 +6,10 @@ import 'package:trackside_app/login.dart';
 import 'package:trackside_app/login.dart';
 import 'package:trackside_app/signup.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:trackside_app/funct/scraper_retrieval.dart';
+import 'package:supabase/supabase.dart';
 
+late final SupabaseClient scraperClient;   //supabaseclient to be used for scraper
 
 
 void main() async {
@@ -17,6 +20,18 @@ void main() async {
     url: 'https://dydfevalyiuefthioeus.supabase.co',     
     anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR5ZGZldmFseWl1ZWZ0aGlvZXVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMwOTQ0MzEsImV4cCI6MjA2ODY3MDQzMX0.XAQot9aufInNI6nRzuN3ZyDpAf4Q-vQGYsTdSqkm8h0',       
   );
+
+  scraperClient= SupabaseClient(     //initialize second supabase client for scraper
+    'https://ljloevgynjbhsabajxqq.supabase.co', 
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxqbG9ldmd5bmpiaHNhYmFqeHFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4OTEyNjksImV4cCI6MjA2ODQ2NzI2OX0.LhINU3Xb4SNrrPHWtidBKoeUjLFJ89FCvYK2dVtFTf0'
+    );
+
+  await loadlatestdata();
+
+  // print(nextRace);
+  // print(driversPoints);
+  // print(constructorsPoints);
+
 
   runApp(
     DevicePreview(
