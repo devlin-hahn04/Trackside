@@ -1,11 +1,20 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:trackside_app/funct/scraper_retrieval.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+  // Helper to sort and get top 3 entries from a Map
+  static List<MapEntry<String, int>> _getTopEntries(Map<String, int> data) {
+    final entries = data.entries.toList();
+    entries.sort((a, b) => b.value.compareTo(a.value));
+    return entries.take(3).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Directly use the globals, no loading state because data is loaded on app startup
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
@@ -62,10 +71,10 @@ class HomePage extends StatelessWidget {
                         const SizedBox(height: 12),
 
                         // Next Grand Prix
-                        const Center(
+                        Center(
                           child: Text(
-                            'Next Grand Prix: Value',
-                            style: TextStyle(color: Colors.white, fontSize: 18),
+                            'Next Grand Prix: ${nextRace ?? 'Unknown'}',
+                            style: const TextStyle(color: Colors.white, fontSize: 18),
                           ),
                         ),
 
@@ -75,8 +84,14 @@ class HomePage extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            _rankingCard('Top Drivers', ['Driver 1', 'Driver 2', 'Driver 3']),
-                            _rankingCard('Top Teams', ['Team A', 'Team B', 'Team C']),
+                            _rankingCard(
+                              'Top Drivers',
+                              _getTopEntries(driversPoints),
+                            ),
+                            _rankingCard(
+                              'Top Teams',
+                              _getTopEntries(constructorsPoints),
+                            ),
                           ],
                         ),
 
@@ -85,7 +100,6 @@ class HomePage extends StatelessWidget {
                         // Bottom Navigation
                         Padding(
                           padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
-
                           child: _glassContainer(
                             height: 70,
                             child: Row(
@@ -151,7 +165,7 @@ class HomePage extends StatelessWidget {
   }
 
   // Ranking Card (Driver/Team)
-  static Widget _rankingCard(String title, List<String> names) {
+  static Widget _rankingCard(String title, List<MapEntry<String, int>> entries) {
     return _glassContainer(
       width: 160,
       child: Column(
@@ -162,25 +176,25 @@ class HomePage extends StatelessWidget {
             style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
-          ...names.map(
-            (name) => Padding(
+          ...entries.map(
+            (entry) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 6),
               child: _glassContainer(
                 width: 120,
-                child: Padding(padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        'Points',
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                      Text(
+                        '${entry.value} pts',
+                        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                       ),
-                      Text(name, style: const TextStyle(color: Colors.white)),
+                      Text(entry.key, style: const TextStyle(color: Colors.white)),
                     ],
                   ),
                 ),
-              )
+              ),
             ),
           ),
         ],

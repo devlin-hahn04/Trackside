@@ -26,7 +26,7 @@ void main() async {
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxqbG9ldmd5bmpiaHNhYmFqeHFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4OTEyNjksImV4cCI6MjA2ODQ2NzI2OX0.LhINU3Xb4SNrrPHWtidBKoeUjLFJ89FCvYK2dVtFTf0'
     );
 
-  await loadlatestdata();
+  await loadlatestdata();    //loading scraper data for testing 
 
   // print(nextRace);
   // print(driversPoints);
