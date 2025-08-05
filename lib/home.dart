@@ -57,16 +57,34 @@ class HomePage extends StatelessWidget {
 
                         const SizedBox(height: 20),
 
-                        // Middle Image Container
+                        // Middle Image Container (Dynamic Image for Next Race)
                         Center(
                           child: _glassContainer(
                             width: MediaQuery.of(context).size.width * 0.9,
                             height: 200,
-                            child: const Center(
-                              child: Icon(Icons.image, size: 80, color: Colors.white38),
-                            ),
+                            noPadding: true, // Optional: remove padding if you want full fill
+                            child: nextRace != null
+                                ? Transform.scale(
+                                    scale: 1.15, // Zoom level
+                                    child: Image.asset(
+                                      'images/F1 tracks/${nextRace!}.jpg',
+                                      fit: BoxFit.cover,
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      errorBuilder: (context, error, stackTrace) {
+                                        return const Center(
+                                          child: Icon(Icons.broken_image, size: 60, color: Colors.white38),
+                                        );
+                                      },
+                                    ),
+                                  )
+                                : const Center(
+                                    child: Icon(Icons.image, size: 60, color: Colors.white38),
+                                  ),
                           ),
                         ),
+
+
 
                         const SizedBox(height: 12),
 
@@ -144,6 +162,7 @@ class HomePage extends StatelessWidget {
     required Widget child,
     double? width,
     double? height,
+    bool noPadding= false,
   }) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
