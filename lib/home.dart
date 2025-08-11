@@ -50,6 +50,7 @@ class HomePage extends StatelessWidget {
                                 ),
                                 width: 130,
                                 height: 40,
+                                color: Colors.red.withOpacity(.3),
                               ),
                             ],
                           ),
@@ -162,7 +163,8 @@ class HomePage extends StatelessWidget {
     required Widget child,
     double? width,
     double? height,
-    bool noPadding= false,
+    bool noPadding = false,
+    Color color = const Color.fromRGBO(255, 255, 255, 0.15), // default same as before
   }) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
@@ -171,9 +173,9 @@ class HomePage extends StatelessWidget {
         child: Container(
           width: width,
           height: height,
-          padding: const EdgeInsets.all(12),
+          padding: noPadding ? EdgeInsets.zero : const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.15),
+            color: color,
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: Colors.white.withOpacity(0.2)),
           ),
@@ -182,6 +184,7 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+
 
   // Ranking Card (Driver/Team)
   static Widget _rankingCard(String title, List<MapEntry<String, int>> entries) {
@@ -200,6 +203,7 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 6),
               child: _glassContainer(
                 width: 120,
+                color: Colors.red.withOpacity(.3),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Column(
