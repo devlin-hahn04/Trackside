@@ -1,6 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:trackside_app/funct/scraper_retrieval.dart';
+
+final supabase= Supabase.instance.client;
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -12,8 +15,24 @@ class HomePage extends StatelessWidget {
     return entries.take(3).toList();
   }
 
+  String? getCurrentUserName(){    //gets current user to display in welcome bubble 
+
+    final user= supabase.auth.currentUser;
+
+    if(user != null){
+
+      return user.userMetadata?['first_name'] as String?;
+
+    }
+
+    return null;
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
+
     // Directly use the globals, no loading state because data is loaded on app startup
     return Scaffold(
       backgroundColor: Colors.black,
@@ -39,20 +58,25 @@ class HomePage extends StatelessWidget {
                       children: [
                         // Welcome Message
                         Padding(
-                          padding: const EdgeInsets.only(top: 16, right: 16, left: 16),
+                          padding: const EdgeInsets.only(top: 10, right: 16, left: 16),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               _glassContainer(
-                                child: const Text(
-                                  'Welcome, user',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                width: 130,
-                                height: 40,
                                 color: Colors.red.withOpacity(.3),
-                              ),
-                            ],
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2), 
+                                  child: Center(
+                                    child: Text(
+                                      'Welcome, ${getCurrentUserName() ?? 'User'}',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              )
+
+                            ]
+
                           ),
                         ),
 
