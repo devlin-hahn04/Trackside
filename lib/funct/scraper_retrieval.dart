@@ -5,6 +5,7 @@ import 'package:trackside_app/main.dart';
 String? nextRace;                        //Global values
 final Map<String, int> driversPoints= {};
 final Map<String, int> constructorsPoints= {};
+final Map<String, String> driverPhotos= {};
 
 
 Future<Map<String, dynamic>?> retrieveScraperData() async {
@@ -53,6 +54,14 @@ Future<void> loadlatestdata() async{
       constructorsPoints[team]= points;     //Logic for mapping team points
 
     }
+
+    final Map<String, dynamic> photosMap = latestdata['driver_photos'];
+
+    driverPhotos.clear();     //clearing data that was previously in photo map 
+
+    photosMap.forEach((key, value) {        
+      driverPhotos[key] = value.toString();
+    });
 
   }
 
