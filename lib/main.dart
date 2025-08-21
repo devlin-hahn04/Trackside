@@ -29,8 +29,13 @@ void main() async {
   await loadlatestdata();    //loading scraper data for testing 
 
   // print(nextRace);
-  // print(driversPoints);
+  
+  // driversData.forEach((driver, data) {
+  // print('$driver: ${data['points']} pts, Team: ${data['team']}');
+  // });
+  
   // print(constructorsPoints);
+  
   // print(driverPhotos);
 
 

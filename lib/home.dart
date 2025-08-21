@@ -129,7 +129,7 @@ class HomePage extends StatelessWidget {
                           children: [
                             _rankingCard(
                               'Top Drivers',
-                              _getTopEntries(driversPoints),
+                              _getTopEntries(driversData.map((driver, data) => MapEntry(driver, data['points'] as int))),
                             ),
                             _rankingCard(
                               'Top Teams',

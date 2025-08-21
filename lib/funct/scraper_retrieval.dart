@@ -1,9 +1,11 @@
+import 'dart:collection';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:trackside_app/main.dart';
 
 
 String? nextRace;                        //Global values
-final Map<String, int> driversPoints= {};
+final Map<String, Map<String, dynamic>> driversData= {};
 final Map<String, int> constructorsPoints= {};
 final Map<String, String> driverPhotos= {};
 
@@ -37,16 +39,23 @@ Future<void> loadlatestdata() async{
 
     final List driversList= latestdata['drivers_championship'];
 
+    driversData.clear();
     for (var entry in driversList){
 
       final String driver= entry['driver'];
       final int points= entry['points'];
-      driversPoints[driver]= points;         //logic for mapping driver points
+      final String team= entry['team'];
+      
+      driversData[driver]= {
+        'points': points, 
+        'team': team,
+      };         //logic for mapping driver points and team
 
     }
 
     final List constructorsList= latestdata['constructors_championship'];
 
+    constructorsPoints.clear();
     for (var entry in constructorsList){
 
       final String team= entry['team'];
@@ -57,7 +66,7 @@ Future<void> loadlatestdata() async{
 
     final Map<String, dynamic> photosMap = latestdata['driver_photos'];
 
-    driverPhotos.clear();     //clearing data that was previously in photo map 
+    driverPhotos.clear();     
 
     photosMap.forEach((key, value) {        
       driverPhotos[key] = value.toString();
