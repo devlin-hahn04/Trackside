@@ -2,6 +2,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:trackside_app/funct/scraper_retrieval.dart';
+import 'package:trackside_app/wdc.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+
 
 final supabase= Supabase.instance.client;
 
@@ -141,15 +145,43 @@ class HomePage extends StatelessWidget {
                         const SizedBox(height: 32),
 
                         // Bottom Navigation
+                        // Bottom Navigation
                         Padding(
                           padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
                           child: _glassContainer(
                             height: 70,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: List.generate(
-                                3,
-                                (_) => ClipOval(
+                              children: [
+                                // LEFTMOST BUTTON → goes to WDC
+                                ClipOval(
+                                  child: BackdropFilter(
+                                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => const DriversPage()),
+                                        );
+                                      },
+                                      child: Container(
+                                        width: 48,
+                                        height: 48,
+                                        decoration: BoxDecoration(
+                                          color: Colors.red.withOpacity(0.4),
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: Colors.white.withOpacity(0.2),
+                                          ),
+                                        ),
+                                        child: const Icon(Icons.emoji_events, color: Colors.white), // maybe trophy icon?
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                                // MIDDLE BUTTON (still placeholder)
+                                ClipOval(
                                   child: BackdropFilter(
                                     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                                     child: Container(
@@ -166,7 +198,26 @@ class HomePage extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                              ),
+
+                                // RIGHTMOST BUTTON (still placeholder)
+                                ClipOval(
+                                  child: BackdropFilter(
+                                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                                    child: Container(
+                                      width: 48,
+                                      height: 48,
+                                      decoration: BoxDecoration(
+                                        color: Colors.red.withOpacity(0.4),
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: Colors.white.withOpacity(0.2),
+                                        ),
+                                      ),
+                                      child: const Icon(Icons.crop_square, color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -215,7 +266,7 @@ class HomePage extends StatelessWidget {
     return _glassContainer(
       width: 160,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             title,
@@ -231,13 +282,23 @@ class HomePage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center, // <-- center horizontally
                     children: [
                       Text(
-                        '${entry.value} pts',
-                        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                        entry.key,
+                        style: GoogleFonts.racingSansOne(
+                          fontSize: 16, // adjust size as you like
+                          fontWeight: FontWeight.normal,
+                          color: Colors.white,
+                        ),
                       ),
-                      Text(entry.key, style: const TextStyle(color: Colors.white)),
+                      Text(
+                        '${entry.value} pts',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
                     ],
                   ),
                 ),
