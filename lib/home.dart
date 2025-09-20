@@ -174,7 +174,7 @@ class HomePage extends StatelessWidget {
                                             color: Colors.white.withOpacity(0.2),
                                           ),
                                         ),
-                                        child: const Icon(Icons.emoji_events, color: Colors.white), // maybe trophy icon?
+                                        child: const Icon(Icons.emoji_events, color: Colors.white), 
                                       ),
                                     ),
                                   ),

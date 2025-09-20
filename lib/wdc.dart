@@ -6,16 +6,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 // Team colors
 Map<String, Color> teamColors = {
-  "Red Bull": const Color(0xFF1E5BC6),
+  "Red Bull Racing": const Color(0xFF1E5BC6),
   "Ferrari": const Color(0xFFDC0000),
   "Mercedes": const Color(0xFF00D2BE),
   "McLaren": const Color(0xFFFF8700),
   "Aston Martin": const Color(0xFF006F62),
   "Alpine": const Color(0xFF2293D1),
   "Williams": const Color(0xFF005AFF),
-  "RB": const Color(0xFF6692FF),
+  "Racing Bulls": const Color(0xFF6692FF),
   "Haas": const Color(0xFFB6BABD),
-  "Sauber": const Color(0xFF52E252),
+  "Kick Sauber": const Color(0xFF52E252),
 };
 
 class DriversPage extends StatelessWidget {
