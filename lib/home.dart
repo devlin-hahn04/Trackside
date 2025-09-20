@@ -4,6 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:trackside_app/funct/scraper_retrieval.dart';
 import 'package:trackside_app/wdc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 
 
@@ -145,7 +146,7 @@ class HomePage extends StatelessWidget {
                         const SizedBox(height: 32),
 
                         // Bottom Navigation
-                        // Bottom Navigation
+                        
                         Padding(
                           padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
                           child: _glassContainer(
@@ -174,7 +175,7 @@ class HomePage extends StatelessWidget {
                                             color: Colors.white.withOpacity(0.2),
                                           ),
                                         ),
-                                        child: const Icon(Icons.emoji_events, color: Colors.white), 
+                                        child: Icon(MdiIcons.racingHelmet, color: Colors.white), 
                                       ),
                                     ),
                                   ),
@@ -184,17 +185,25 @@ class HomePage extends StatelessWidget {
                                 ClipOval(
                                   child: BackdropFilter(
                                     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                                    child: Container(
-                                      width: 48,
-                                      height: 48,
-                                      decoration: BoxDecoration(
-                                        color: Colors.red.withOpacity(0.4),
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: Colors.white.withOpacity(0.2),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => const HomePage()),
+                                        );
+                                      },
+                                      child: Container(
+                                        width: 48,
+                                        height: 48,
+                                        decoration: BoxDecoration(
+                                          color: Colors.red.withOpacity(0.4),
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: Colors.white.withOpacity(0.2),
+                                          ),
                                         ),
+                                        child: Icon(MdiIcons.garageVariant, color: Colors.white), 
                                       ),
-                                      child: const Icon(Icons.crop_square, color: Colors.white),
                                     ),
                                   ),
                                 ),
@@ -213,7 +222,7 @@ class HomePage extends StatelessWidget {
                                           color: Colors.white.withOpacity(0.2),
                                         ),
                                       ),
-                                      child: const Icon(Icons.crop_square, color: Colors.white),
+                                      child: const Icon(Icons.emoji_events, color: Colors.white),
                                     ),
                                   ),
                                 ),

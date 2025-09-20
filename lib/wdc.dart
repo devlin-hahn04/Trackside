@@ -2,6 +2,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:trackside_app/funct/scraper_retrieval.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:trackside_app/home.dart';
+
+
 
 
 // Team colors
@@ -98,30 +102,94 @@ class DriversPage extends StatelessWidget {
                 height: 70,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: List.generate(
-                    3,
-                    (_) => ClipOval(
+                  children: [
+                    // LEFTMOST BUTTON → goes to WDC (Drivers Page)
+                    ClipOval(
                       child: BackdropFilter(
                         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                        child: Container(
-                          width: 48,
-                          height: 48,
-                          decoration: BoxDecoration(
-                            color: Colors.red.withOpacity(0.4),
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Colors.white.withOpacity(0.2),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const DriversPage()),
+                            );
+                          },
+                          child: Container(
+                            width: 48,
+                            height: 48,
+                            decoration: BoxDecoration(
+                              color: Colors.red.withOpacity(0.4),
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Colors.white.withOpacity(0.2),
+                              ),
                             ),
+                            child: Icon(MdiIcons.racingHelmet, color: Colors.white),
                           ),
-                          child: const Icon(Icons.crop_square, color: Colors.white),
                         ),
                       ),
                     ),
-                  ),
+
+                    // MIDDLE BUTTON → Constructors’ Championship
+                    ClipOval(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const HomePage()),
+                            );
+                          },
+                          child: Container(
+                            width: 48,
+                            height: 48,
+                            decoration: BoxDecoration(
+                              color: Colors.red.withOpacity(0.4),
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Colors.white.withOpacity(0.2),
+                              ),
+                            ),
+                            child: Icon(MdiIcons.garageVariant, color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    // RIGHTMOST BUTTON → Driver Championship
+                    ClipOval(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                        child: InkWell(
+                          onTap: () {
+                            // TODO: Navigate to HomePage or Driver Championship page
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const HomePage()),
+                            );
+                          },
+                          child: Container(
+                            width: 48,
+                            height: 48,
+                            decoration: BoxDecoration(
+                              color: Colors.red.withOpacity(0.4),
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Colors.white.withOpacity(0.2),
+                              ),
+                            ),
+                            child: Icon(MdiIcons.trophy, color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          ),
+          )
+
         ],
       ),
     );
