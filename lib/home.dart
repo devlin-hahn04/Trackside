@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:trackside_app/funct/scraper_retrieval.dart';
 import 'package:trackside_app/wdc.dart';
+import 'package:trackside_app/wcc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -154,7 +155,7 @@ class HomePage extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                // LEFTMOST BUTTON → goes to WDC
+                                // LEFTMOST BUTTON -> goes to WDC
                                 ClipOval(
                                   child: BackdropFilter(
                                     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
@@ -181,7 +182,7 @@ class HomePage extends StatelessWidget {
                                   ),
                                 ),
 
-                                // MIDDLE BUTTON (still placeholder)
+                                // MIDDLE BUTTON -> home 
                                 ClipOval(
                                   child: BackdropFilter(
                                     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
@@ -208,21 +209,29 @@ class HomePage extends StatelessWidget {
                                   ),
                                 ),
 
-                                // RIGHTMOST BUTTON (still placeholder)
+                                // RIGHTMOST BUTTON -> goes to WDC
                                 ClipOval(
                                   child: BackdropFilter(
                                     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                                    child: Container(
-                                      width: 48,
-                                      height: 48,
-                                      decoration: BoxDecoration(
-                                        color: Colors.red.withOpacity(0.4),
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: Colors.white.withOpacity(0.2),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => const ConstructorsPage()),
+                                        );
+                                      },
+                                      child: Container(
+                                        width: 48,
+                                        height: 48,
+                                        decoration: BoxDecoration(
+                                          color: Colors.red.withOpacity(0.4),
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: Colors.white.withOpacity(0.2),
+                                          ),
                                         ),
+                                        child: Icon(Icons.emoji_events, color: Colors.white), 
                                       ),
-                                      child: const Icon(Icons.emoji_events, color: Colors.white),
                                     ),
                                   ),
                                 ),
