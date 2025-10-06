@@ -45,7 +45,11 @@ class HomePage extends StatelessWidget {
       body: Stack(
         children: [
           // Background image
-          Positioned.fill(
+          Positioned(
+            top: MediaQuery.of(context).padding.top * 0.6, // pushes it down dynamically
+            left: 0,
+            right: 0,
+            bottom: 0,
             child: Image.asset(
               'images/Dashboard.png',
               fit: BoxFit.cover,
