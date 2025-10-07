@@ -30,36 +30,30 @@ class DriversPage extends StatelessWidget {
     final driverEntries = driversData.entries.toList();
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color.fromARGB(255, 49, 49, 49),
       body: Stack(
         children: [
-          // 🔹 Background image
-          SizedBox.expand(
-            child: Image.asset(
-              'images/WDCPage.png', 
-              fit: BoxFit.cover,
-            ),
-          ),
-
           SafeArea(
-            child: Align(
-              alignment: Alignment.topRight, // moves it all the way to the right
-              child: Padding(
-                padding: const EdgeInsets.all(16.0), // optional spacing from edges
-                child: Row(
-                  mainAxisSize: MainAxisSize.min, // so row wraps its content
-                  children: [
-                    const SizedBox(width: 12),
-                    Text(
-                      'Drivers Championship',
-                      style: GoogleFonts.racingSansOne(
-                        fontSize: 23,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween, // Logo on left, text on right
+                children: [
+                  Image.asset(
+                    'images/TracksideLogo.png', 
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.contain,
+                  ),
+                  Text(
+                    'Drivers Championship',
+                    style: GoogleFonts.racingSansOne(
+                      fontSize: 23,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

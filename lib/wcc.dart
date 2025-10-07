@@ -16,36 +16,30 @@ class ConstructorsPage extends StatelessWidget {
       ..sort((a, b) => b.value.compareTo(a.value));
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color.fromARGB(255, 49, 49, 49),
       body: Stack(
         children: [
-          // 🔹 Background image
-          SizedBox.expand(
-            child: Image.asset(
-              'images/WDCPage.png',
-              fit: BoxFit.cover,
-            ),
-          ),
-
           SafeArea(
-            child: Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(width: 10),
-                    Text(
-                      'Constructors Championship',
-                      style: GoogleFonts.racingSansOne(
-                        fontSize: 19,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween, // Logo on left, text on right
+                children: [
+                  Image.asset(
+                    'images/TracksideLogo.png', 
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.contain,
+                  ),
+                  Text(
+                    'Drivers Championship',
+                    style: GoogleFonts.racingSansOne(
+                      fontSize: 23,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
