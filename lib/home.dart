@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
             right: 0,
             bottom: 0,
             child: Image.asset(
-              'images/Dashboard.png',
+              'images/HomeDashboard.png',
               fit: BoxFit.cover,
             ),
           ),
@@ -70,8 +70,18 @@ class HomePage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 10, right: 16, left: 16),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+
+                              // Logo on the left
+                              Image.asset(
+                                'images/TracksideLogo.png',
+                                width: 130,
+                                height: 130,
+                                fit: BoxFit.contain,
+                              ),
+
+                              //Welcome bubble on right 
                               _glassContainer(
                                 color: Colors.red.withOpacity(.3),
                                 child: Padding(
